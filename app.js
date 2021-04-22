@@ -7,6 +7,10 @@ const newGameBtn = document.getElementById("fresh");
 const dealBtn = document.getElementById("deal");
 const hitBtn = document.getElementById("hit");
 const stickBtn = document.getElementById("stick");
+const resultBtn = document.getElementById("result-btn");
+//RESULT VARIABLES
+const result = document.getElementById("result");
+const resultScreen = document.getElementById("result-screen");
 //DECK VARIABLES
 const deckSizeBox = document.getElementById("deck-size-box");
 let dealtCardsData = document.getElementsByClassName("card-data");
@@ -49,8 +53,10 @@ const deckLength = () => {
 const newGame = () => {
     freshDeck();
     cardClear();
-    updatePlayerScore(0);
-    updateDealerScore(0);
+    playerScore = 0;
+    dealerScore = 0;
+    pScore.innerHTML = playerScore;
+    dScore.innerHTML = dealerScore;
 };
 const freshDeck = () => {
     let newDeck = new Array();
@@ -115,6 +121,9 @@ const randomCard = (item, person) => {
     suitCheckUpdate(card, item);
     if (person === "player") {
         updatePlayerScore(card.Value);
+    } else if (person === "dealerNew") {
+        updateHiddenDealerScore(card.Value);
+        dScore.innerHTML = "?";
     } else if (person === "dealer") {
         updateDealerScore(card.Value);
     } else {
@@ -124,28 +133,77 @@ const randomCard = (item, person) => {
     deckLength();
 };
 const updatePlayerScore = (num) => {
-    if (isNaN(num)) {
+    if (num == "A") {
+        playerScore += 11;
+        pScore.innerHTML = playerScore;
+        checkPlayerScore();
+    } else if (isNaN(num)) {
         playerScore += 10;
         pScore.innerHTML = playerScore;
+        checkPlayerScore();
     } else if (num === 0) {
         playerScore = 0;
         pScore.innerHTML = playerScore;
     } else {
         playerScore += num;
         pScore.innerHTML = playerScore;
+        checkPlayerScore();
+    }
+};
+const updateHiddenDealerScore = (num) => {
+    if (num == "A") {
+        dealerScore += 11;
+    } else if (isNaN(num)) {
+        dealerScore += 10;
+    } else {
+        dealerScore += num;
     }
 };
 const updateDealerScore = (num) => {
-    if (isNaN(num)) {
+    if (num == "A") {
+        dealerScore += 11;
+        dScore.innerHTML = dealerScore;
+        checkDealerScore();
+    } else if (isNaN(num)) {
         dealerScore += 10;
         dScore.innerHTML = dealerScore;
+        checkDealerScore();
     } else if (num === 0) {
         dealerScore = 0;
         dScore.innerHTML = dealerScore;
     } else {
         dealerScore += num;
         dScore.innerHTML = dealerScore;
+        checkDealerScore();
     }
+};
+const checkPlayerScore = () => {
+    if (playerScore > 21) {
+        hitBtn.disabled = true;
+        stickBtn.disabled = true;
+        resultScreen.style.zIndex = 10;
+        resultScreen.style.opacity = 1;
+        result.innerHTML = "BUST!";
+    }
+    return;
+};
+const checkDealerScore = () => {
+    if (dealerScore > 21) {
+        hitBtn.disabled = true;
+        stickBtn.disabled = true;
+        resultScreen.style.zIndex = 10;
+        resultScreen.style.opacity = 1;
+        result.innerHTML = "DEALER BUST";
+    } else if (dealerScore > playerScore) {
+        hitBtn.disabled = true;
+        stickBtn.disabled = true;
+        resultScreen.style.zIndex = 10;
+        resultScreen.style.opacity = 1;
+        result.innerHTML = "DEALER WINS";
+    } else if (dealerScore == playerScore || dealerScore < playerScore) {
+        dealerLogic();
+    }
+    return;
 };
 const updateCardColor = (color, item) => {
     let cardCh = item.children;
@@ -159,21 +217,88 @@ const dealCards = () => {
         pCard1.style.opacity = 1;
     }, 200);
     setTimeout(() => {
-        randomCard(dc1, "dealer");
+        randomCard(dc1, "dealerNew");
         dCard1.style.opacity = 1;
+        dScore.innerHTML = "?";
     }, 400);
     setTimeout(() => {
         randomCard(pc2, "player");
         pCard2.style.opacity = 1;
     }, 600);
     setTimeout(() => {
-        randomCard(dc2, "dealer");
+        randomCard(dc2, "dealerNew");
         dCard2.style.opacity = 1;
+        dScore.innerHTML = "?";
     }, 800);
     playerCardsDealt = 2;
     dealerCardsDealt = 2;
 };
-
+const playerAnotherCard = () => {
+    if (playerCardsDealt === 2) {
+        setTimeout(() => {
+            randomCard(pc3, "player");
+            pCard3.style.opacity = 1;
+            playerCardsDealt++;
+        }, 200);
+    } else if (playerCardsDealt === 3) {
+        setTimeout(() => {
+            randomCard(pc4, "player");
+            pCard4.style.opacity = 1;
+            playerCardsDealt++;
+        }, 200);
+    } else {
+        setTimeout(() => {
+            randomCard(pc5, "player");
+            pCard5.style.opacity = 1;
+            playerCardsDealt++;
+        }, 200);
+        hitBtn.disabled = true;
+    }
+};
+const dealerAnotherCard = () => {
+    if (dealerCardsDealt === 2) {
+        setTimeout(() => {
+            randomCard(dc3, "dealer");
+            dScore.innerHTML = dealerScore;
+            dCard3.style.opacity = 1;
+            dealerCardsDealt++;
+        }, 1500);
+    } else if (dealerCardsDealt === 3) {
+        setTimeout(() => {
+            randomCard(dc4, "dealer");
+            dScore.innerHTML = dealerScore;
+            dCard4.style.opacity = 1;
+            dealerCardsDealt++;
+        }, 3000);
+    } else {
+        setTimeout(() => {
+            randomCard(dc5, "dealer");
+            dScore.innerHTML = dealerScore;
+            dCard5.style.opacity = 1;
+            dealerCardsDealt++;
+        }, 4500);
+        hitBtn.disabled = true;
+    }
+};
+const dealerLogic = () => {
+    if (dealerScore > playerScore) {
+        hitBtn.disabled = true;
+        stickBtn.disabled = true;
+        resultScreen.style.zIndex = 10;
+        resultScreen.style.opacity = 1;
+        result.innerHTML = "Dealer Wins";
+    } else if (dealerScore == playerScore && dealerScore > 16) {
+        hitBtn.disabled = true;
+        stickBtn.disabled = true;
+        resultScreen.style.zIndex = 10;
+        resultScreen.style.opacity = 1;
+        result.innerHTML = "Tie";
+    } else if (dealerScore == playerScore && dealerScore < 17) {
+        dealerAnotherCard();
+    } else if (dealerScore < playerScore) {
+        dealerAnotherCard();
+    }
+};
 //ONLOAD FUNCTION CALL
 newGame();
 
@@ -189,4 +314,16 @@ dealBtn.addEventListener("click", () => {
     hitBtn.disabled = false;
     stickBtn.disabled = false;
     dealCards();
+});
+hitBtn.addEventListener("click", () => {
+    playerAnotherCard();
+});
+resultBtn.addEventListener("click", () => {
+    resultScreen.style.zIndex = -1;
+    resultScreen.style.opacity = 0;
+    result.innerHTML = "";
+});
+stickBtn.addEventListener("click", () => {
+    dScore.innerHTML = dealerScore;
+    dealerLogic();
 });
