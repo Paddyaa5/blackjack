@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Blackjack</title>
+        <link rel="shortcut icon" href="favicon.ico" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Roboto:wght@100&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <section class="full-page">
+            <section class="header-section">
+                <h1 class="page-title"><span class="smaller">&#9825 &#9826</span> Blackjack <span class="smaller">&#9828 &#9831</span></h1>
+            </section>
+            <section class="game-section">
+                <div class="dealer-area">
+                    <div class="details">
+                        <h3 class="name">Dealer</h3>
+                        <h2 class="score" id="dealer-score"></h2>
+                    </div>
+                    <article class="cards">
+                        <div class="card" id="dealer-card1">
+                            <div class="inner-card" id="dc1-data">
+                                <h5 class="card-top-left card-data"></h5>
+                                <h5 class="card-left card-data"></h5>
+                                <h2 class="card-middle card-data"></h2>
+                                <h5 class="card-bottom-right card-data"></h5>
+                                <h5 class="card-right card-data"></h5>
+                            </div>
+                        </div>
+                        <div class="card" id="dealer-card2">
+                            <div class="inner-card" id="dc2-data">
+                                <h5 class="card-top-left card-data"></h5>
+                                <h5 class="card-left card-data"></h5>
+                                <h2 class="card-middle card-data"></h2>
+                                <h5 class="card-bottom-right card-data"></h5>
+                                <h5 class="card-right card-data"></h5>
+                            </div>
+                        </div>
+                        <div class="card" id="dealer-card3">
+                            <div class="inner-card" id="dc3-data">
+                                <h5 class="card-top-left card-data"></h5>
+                                <h5 class="card-left card-data"></h5>
+                                <h2 class="card-middle card-data"></h2>
+                                <h5 class="card-bottom-right card-data"></h5>
+                                <h5 class="card-right card-data"></h5>
+                            </div>
+                        </div>
+                        <div class="card" id="dealer-card4">
+                            <div class="inner-card" id="dc4-data">
+                                <h5 class="card-top-left card-data"></h5>
+                                <h5 class="card-left card-data"></h5>
+                                <h2 class="card-middle card-data"></h2>
+                                <h5 class="card-bottom-right card-data"></h5>
+                                <h5 class="card-right card-data"></h5>
+                            </div>
+                        </div>
+                        <div class="card" id="dealer-card5">
+                            <div class="inner-card" id="dc5-data">
+                                <h5 class="card-top-left card-data"></h5>
+                                <h5 class="card-left card-data"></h5>
+                                <h2 class="card-middle card-data"></h2>
+                                <h5 class="card-bottom-right card-data"></h5>
+                                <h5 class="card-right card-data"></h5>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="player-area">
+                    <div class="details">
+                        <h3 class="name">Player</h3>
+                        <h2 class="score" id="player-score"></h2>
+                    </div>
+                    <article class="cards">
+                        <div class="card" id="player-card1">
+                            <div class="inner-card" id="pc1-data">
+                                <h5 class="card-top-left card-data"></h5>
+                                <h5 class="card-left card-data"></h5>
+                                <h2 class="card-middle card-data"></h2>
+                                <h5 class="card-bottom-right card-data"></h5>
+                                <h5 class="card-right card-data"></h5>
+                            </div>
+                        </div>
+                        <div class="card" id="player-card2">
+                            <div class="inner-card" id="pc2-data">
+                                <h5 class="card-top-left card-data"></h5>
+                                <h5 class="card-left card-data"></h5>
+                                <h2 class="card-middle card-data"></h2>
+                                <h5 class="card-bottom-right card-data"></h5>
+                                <h5 class="card-right card-data"></h5>
+                            </div>
+                        </div>
+                        <div class="card" id="player-card3">
+                            <div class="inner-card" id="pc3-data">
+                                <h5 class="card-top-left card-data"></h5>
+                                <h5 class="card-left card-data"></h5>
+                                <h2 class="card-middle card-data"></h2>
+                                <h5 class="card-bottom-right card-data"></h5>
+                                <h5 class="card-right card-data"></h5>
+                            </div>
+                        </div>
+                        <div class="card" id="player-card4">
+                            <div class="inner-card" id="pc4-data">
+                                <h5 class="card-top-left card-data"></h5>
+                                <h5 class="card-left card-data"></h5>
+                                <h2 class="card-middle card-data"></h2>
+                                <h5 class="card-bottom-right card-data"></h5>
+                                <h5 class="card-right card-data"></h5>
+                            </div>
+                        </div>
+                        <div class="card" id="player-card5">
+                            <div class="inner-card" id="pc5-data">
+                                <h5 class="card-top-left card-data"></h5>
+                                <h5 class="card-left card-data"></h5>
+                                <h2 class="card-middle card-data"></h2>
+                                <h5 class="card-bottom-right card-data"></h5>
+                                <h5 class="card-right card-data"></h5>
+                            </div>
+                        </div>
+                    </article>
+                    <div class="game-buttons">
+                        <button disabled id="hit">Hit</button>
+                        <button disabled id="stick">Stick</button>
+                    </div>
+                </div>
+                <div class="deck-area">
+                    <div class="details">
+                        <h3 class="name">Deck</h3>
+                        <h2 class="score" id="deck-size-box"></h2>
+                    </div>
+                    <div class="buttons">
+                        <button id="fresh">New Game</button>
+                        <button id="deal">Deal</button>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <script src="app.js"></script>
+    </body>
+</html>

@@ -1,0 +1,189 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    overscroll-behavior-y: none;
+    background: rgb(43, 139, 56);
+    background: radial-gradient(circle, rgba(43, 139, 56, 1) 0%, rgba(20, 81, 40, 1) 100%);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Orelega One", cursive;
+}
+p {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-size: calc(10px + 0.5vw);
+}
+button {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    cursor: pointer;
+    outline: none;
+    padding: 18px 0;
+    min-width: 100px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    background-color: #23395b;
+    color: white;
+}
+button:hover {
+    background-color: #1d2f49;
+}
+button:disabled {
+    background-color: #a2abab;
+    color: whitesmoke;
+}
+.full-page {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+.header-section {
+    position: relative;
+    height: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.page-title {
+    position: relative;
+    z-index: 1;
+    font-size: calc(40px + 2vw);
+    letter-spacing: 1px;
+}
+.smaller {
+    font-size: calc(20px + 2vw);
+}
+.game-section {
+    position: relative;
+    height: 85vh;
+    width: 100%;
+    padding: 25px;
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 15px 15px;
+    grid-template-areas:
+        "Dealer Deck"
+        "Player Player";
+}
+.dealer-area {
+    grid-area: Dealer;
+    display: flex;
+}
+.player-area {
+    grid-area: Player;
+    display: flex;
+}
+.deck-area {
+    grid-area: Deck;
+    display: flex;
+}
+.details {
+    height: 100%;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.buttons {
+    width: calc(100% - 100px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.cards {
+    width: 365px;
+    border-radius: 20px;
+    border: 2px dashed grey;
+    height: 100%;
+    padding: 5px;
+    position: relative;
+}
+.card:nth-child(1) {
+    z-index: 0;
+}
+.card:nth-child(2) {
+    z-index: 1;
+    left: 55px;
+}
+.card:nth-child(3) {
+    z-index: 2;
+    left: 105px;
+}
+.card:nth-child(4) {
+    z-index: 3;
+    left: 155px;
+}
+.card:nth-child(5) {
+    z-index: 4;
+    left: 205px;
+}
+.card {
+    position: absolute;
+    height: calc(100% - 10px);
+    width: 150px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s all;
+    background-color: white;
+    border: 0.5px solid grey;
+}
+.inner-card {
+    border-radius: 15px;
+    height: 95%;
+    width: 95%;
+    background-color: white;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card-middle {
+    font-size: 80px;
+}
+.card-top-left,
+.card-bottom-right,
+.card-left,
+.card-right {
+    position: absolute;
+    font-size: 20px;
+}
+.card-top-left {
+    top: 10px;
+    left: 15px;
+}
+.card-bottom-right {
+    right: 15px;
+    bottom: 10px;
+}
+.card-left {
+    top: 30px;
+    left: 15px;
+}
+.card-right {
+    right: 15px;
+    bottom: 30px;
+}
+.game-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 200px;
+}
