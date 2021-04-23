@@ -15,6 +15,7 @@ const resultScreen = document.getElementById("result-screen");
 const deckSizeBox = document.getElementById("deck-size-box");
 let dealtCardsData = document.getElementsByClassName("card-data");
 let dealtCards = document.getElementsByClassName("card");
+let dealtDealerCards = document.getElementsByClassName("dealer-card");
 //PLAYER VARIABLES
 const pCard1 = document.getElementById("player-card1");
 const pCard2 = document.getElementById("player-card2");
@@ -29,6 +30,7 @@ const pc5 = document.getElementById("pc5-data");
 //DEALER VARIABLES
 const dCard1 = document.getElementById("dealer-card1");
 const dCard2 = document.getElementById("dealer-card2");
+const dCard2Hidden = document.getElementById("dealer-card2-hidden");
 const dCard3 = document.getElementById("dealer-card3");
 const dCard4 = document.getElementById("dealer-card4");
 const dCard5 = document.getElementById("dealer-card5");
@@ -75,6 +77,9 @@ const cardClear = () => {
     }
     for (let j = 0; j < dealtCards.length; j++) {
         dealtCards[j].style.opacity = 0;
+    }
+    for (let k = 0; k < dealtDealerCards.length; k++) {
+        dealtDealerCards[k].style.opacity = 0;
     }
 };
 const removeFromDeck = (num) => {
@@ -181,6 +186,8 @@ const checkPlayerScore = () => {
     if (playerScore > 21) {
         hitBtn.disabled = true;
         stickBtn.disabled = true;
+        dCard2Hidden.style.opacity = 0;
+        dCard2.style.opacity = 1;
         resultScreen.style.zIndex = 10;
         resultScreen.style.opacity = 1;
         result.innerHTML = "BUST!";
@@ -226,9 +233,8 @@ const dealCards = () => {
         pCard2.style.opacity = 1;
     }, 600);
     setTimeout(() => {
+        dCard2Hidden.style.opacity = 1;
         randomCard(dc2, "dealerNew");
-        dCard2.style.opacity = 1;
-        dScore.innerHTML = "?";
     }, 800);
     playerCardsDealt = 2;
     dealerCardsDealt = 2;
@@ -262,7 +268,7 @@ const dealerAnotherCard = () => {
             randomCard(dc3, "dealer");
             dScore.innerHTML = dealerScore;
             dCard3.style.opacity = 1;
-        }, 1500);
+        }, 2000);
     } else if (dealerCardsDealt === 3) {
         setTimeout(() => {
             dealerCardsDealt++;
@@ -298,6 +304,12 @@ const dealerLogic = () => {
         dealerAnotherCard();
     }
 };
+const revealCard = () => {
+    setTimeout(() => {
+        dCard2Hidden.style.opacity = 0;
+        dCard2.style.opacity = 1;
+    }, 500);
+};
 //ONLOAD FUNCTION CALL
 newGame();
 
@@ -325,6 +337,7 @@ resultBtn.addEventListener("click", () => {
 stickBtn.addEventListener("click", () => {
     hitBtn.disabled = true;
     stickBtn.disabled = true;
+    revealCard();
     dScore.innerHTML = dealerScore;
     dealerLogic();
 });

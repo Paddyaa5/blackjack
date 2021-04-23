@@ -40,6 +40,7 @@ h1 {
     width: 100vw;
     overflow: hidden;
 }
+
 .game-result {
     position: absolute;
     height: 100%;
@@ -147,7 +148,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: calc(100% - 10px);
+    height: 100%;
     width: 100%;
     background: repeating-linear-gradient(135deg, #ff5c5c, #ff5c5c 5px, #520000 5px, #520000 10px);
 }
@@ -202,7 +203,31 @@ h1 {
     z-index: 4;
     left: 205px;
 }
-.card {
+.dealer-card:nth-child(1) {
+    z-index: 0;
+}
+.dealer-card:nth-child(2) {
+    z-index: 1;
+    left: 55px;
+}
+.dealer-card:nth-child(3) {
+    z-index: 1;
+    left: 55px;
+}
+.dealer-card:nth-child(4) {
+    z-index: 2;
+    left: 105px;
+}
+.dealer-card:nth-child(5) {
+    z-index: 3;
+    left: 155px;
+}
+.dealer-card:nth-child(6) {
+    z-index: 4;
+    left: 205px;
+}
+.card,
+.dealer-card {
     position: absolute;
     height: calc(100% - 10px);
     width: 150px;
