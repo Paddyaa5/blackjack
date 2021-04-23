@@ -239,45 +239,44 @@ const playerAnotherCard = () => {
             randomCard(pc3, "player");
             pCard3.style.opacity = 1;
             playerCardsDealt++;
-        }, 200);
+        }, 500);
     } else if (playerCardsDealt === 3) {
         setTimeout(() => {
             randomCard(pc4, "player");
             pCard4.style.opacity = 1;
             playerCardsDealt++;
-        }, 200);
+        }, 500);
     } else {
         setTimeout(() => {
             randomCard(pc5, "player");
             pCard5.style.opacity = 1;
             playerCardsDealt++;
-        }, 200);
+        }, 500);
         hitBtn.disabled = true;
     }
 };
 const dealerAnotherCard = () => {
     if (dealerCardsDealt === 2) {
         setTimeout(() => {
+            dealerCardsDealt++;
             randomCard(dc3, "dealer");
             dScore.innerHTML = dealerScore;
             dCard3.style.opacity = 1;
-            dealerCardsDealt++;
         }, 1500);
     } else if (dealerCardsDealt === 3) {
         setTimeout(() => {
+            dealerCardsDealt++;
             randomCard(dc4, "dealer");
             dScore.innerHTML = dealerScore;
             dCard4.style.opacity = 1;
-            dealerCardsDealt++;
-        }, 3000);
+        }, 1500);
     } else {
         setTimeout(() => {
+            dealerCardsDealt++;
             randomCard(dc5, "dealer");
             dScore.innerHTML = dealerScore;
             dCard5.style.opacity = 1;
-            dealerCardsDealt++;
-        }, 4500);
-        hitBtn.disabled = true;
+        }, 1500);
     }
 };
 const dealerLogic = () => {
@@ -324,6 +323,8 @@ resultBtn.addEventListener("click", () => {
     result.innerHTML = "";
 });
 stickBtn.addEventListener("click", () => {
+    hitBtn.disabled = true;
+    stickBtn.disabled = true;
     dScore.innerHTML = dealerScore;
     dealerLogic();
 });
